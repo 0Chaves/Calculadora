@@ -12,6 +12,8 @@ import javafx.scene.layout.VBox;
 
 
 public class Main extends Application {
+	Integer valor1;
+	Integer valor2;
 	@Override
 	public void start(Stage primaryStage) {
 		try {
@@ -28,12 +30,15 @@ public class Main extends Application {
 			Button num9 = new Button("9");
 			Button num0 = new Button("0");
 			Button C = new Button("C");
-			int valor1;
-			int valor2;
+			Button plus = new Button("+");
+			Button equals = new Button("=");
+			
 			
 			//Funcionalidade dos botoes
 			C.setOnAction(e ->{
 				visor.setText("");
+				valor1 = 0;
+				valor2 = 0;
 			});
 			
 			num1.setOnAction(e->{
@@ -67,6 +72,15 @@ public class Main extends Application {
 				visor.setText(visor.getText()+num0.getText());
 			});
 			
+			plus.setOnAction(e->{
+				valor1 = Integer.parseInt(visor.getText());
+				visor.setText("");
+			});
+			equals.setOnAction(e->{
+				valor2 = Integer.parseInt(visor.getText());
+				Integer result = valor1 + valor2;
+				visor.setText(result.toString());
+			});
 			
 			visor.setEditable(false);
 			visor.setMaxWidth(200);
@@ -87,7 +101,8 @@ public class Main extends Application {
 			linha1.getChildren().addAll(num1,num2,num3);
 			linha2.getChildren().addAll(num4,num5,num6);
 			linha3.getChildren().addAll(num7,num8,num9);
-			linha4.getChildren().addAll(C,num0);
+			linha4.getChildren().addAll(C,num0, plus, equals);
+			
 			
 			//Cria e mostra a cena
 			Scene scene = new Scene(root,400,400);
